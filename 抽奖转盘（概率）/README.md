@@ -1,3 +1,19 @@
 ## 转盘抽奖
 
-> B站: [【前端】原生JS开发转盘抽奖](https://www.bilibili.com/video/BV1Mt4y1Q7UD/)
+效果预览：
+
+![动画](./动画.gif)
+
+1. 拉下后双击index.html文件即可（谷歌）
+
+2. 点击中间按钮=>开始抽奖=>滚三圈后弹出结果
+
+3. 自定义：
+
+   核心逻辑：main.js文件
+
+   奖品内容：consts.js文件
+
+   扇形颜色：consts.js文件
+
+   
