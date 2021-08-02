@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刮刮卡——fur</title>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="400" height="100"></canvas>
+    <div class="text"></div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .text {
+            position: absolute;
+            left: 130px;
+            top: 35px;
+            z-index: -1;
+        }
+    </style>
+    <script>
+        drawCanvas()
+        function getResult(){
+            let text = document.querySelector('.text')
+            text.innerText='恭喜获得一等奖'
+        }
+        function drawCanvas() {
+            const canvas = document.getElementById('canvas')
+            // 点击下去的时候拿到获奖结果，防止偷窥结果
+            canvas.addEventListener('mousedown',getResult)
+
+            const ctx = canvas.getContext('2d')
+
+            // 填充的颜色
+            ctx.fillStyle = 'darkgray'
+            // 填充矩形 fillRect(起始X,起始Y,终点X,终点Y)
+            ctx.fillRect(0, 0, 400, 100)
+            ctx.fillStyle = '#fff'
+            // 绘制填充文字
+            ctx.fillText('刮刮卡', 180, 50)
+
+            let isDraw = false
+            canvas.onmousedown = function () {
+                isDraw = true
+            }
+            canvas.onmousemove = function (e) {
+                if (!isDraw) return
+                // 计算鼠标在canvas里的位置
+                const x = e.pageX - canvas.offsetLeft
+                const y = e.pageY - canvas.offsetTop
+                // 设置globalCompositeOperation
+                ctx.globalCompositeOperation = 'destination-out'
+                // 画圆
+                ctx.arc(x, y, 10, 0, 2 * Math.PI)
+                // 填充圆形
+                ctx.fill()
+            }
+            canvas.onmouseup = function () {
+                isDraw = false
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
